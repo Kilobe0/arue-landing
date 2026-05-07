@@ -739,6 +739,7 @@
       .estrutura,
       .galeria,
       .arue-club,
+      .checkout-section,
       .info-section,
       .patrocinadores,
       .final-cta {
@@ -1500,6 +1501,267 @@
         transform: translateY(0) scale(0.98);
       }
 
+      /* CHECKOUT */
+      .checkout-section {
+        padding: 120px 48px;
+        background: var(--bg2);
+      }
+
+      .checkout-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
+        gap: 64px;
+        align-items: start;
+      }
+
+      .checkout-copy {
+        position: sticky;
+        top: 104px;
+      }
+
+      .checkout-title {
+        font-family: var(--font-display);
+        font-size: clamp(40px, 6vw, 76px);
+        font-weight: 900;
+        line-height: 0.9;
+        text-transform: uppercase;
+        color: var(--text);
+        margin-bottom: 18px;
+      }
+
+      .checkout-title em {
+        color: var(--gold);
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-weight: 400;
+        text-transform: none;
+      }
+
+      .checkout-sub {
+        max-width: 520px;
+        font-family: var(--font-serif);
+        font-size: 16px;
+        font-style: italic;
+        color: var(--text-mid);
+        line-height: 1.85;
+      }
+
+      .checkout-price-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 32px;
+      }
+
+      .checkout-price {
+        border: 1px solid var(--border);
+        background: var(--bg);
+        padding: 18px;
+      }
+
+      .checkout-price span {
+        display: block;
+        font-family: var(--font-display);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--text-dim);
+        margin-bottom: 6px;
+      }
+
+      .checkout-price strong {
+        display: block;
+        font-family: var(--font-display);
+        font-size: 30px;
+        font-weight: 800;
+        line-height: 1;
+        color: var(--text);
+      }
+
+      .checkout-panel {
+        background: var(--bg);
+        border: 1px solid var(--border);
+        padding: 28px;
+        box-shadow: 0 18px 48px oklch(20% 0.08 145 / 0.08);
+      }
+
+      .checkout-form {
+        display: grid;
+        gap: 16px;
+      }
+
+      .checkout-field {
+        display: grid;
+        gap: 8px;
+      }
+
+      .checkout-field label,
+      .checkout-gender legend,
+      .checkout-summary-label {
+        font-family: var(--font-display);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--text-mid);
+      }
+
+      .checkout-field input {
+        width: 100%;
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        color: var(--text);
+        font-family: var(--font-display);
+        font-size: 16px;
+        font-weight: 400;
+        letter-spacing: 0.04em;
+        padding: 14px 16px;
+        outline: none;
+        transition:
+          border-color var(--motion-fast) var(--motion-ease-out),
+          background var(--motion-fast) var(--motion-ease-out),
+          box-shadow var(--motion-fast) var(--motion-ease-out);
+      }
+
+      .checkout-field input:focus {
+        background: var(--bg);
+        border-color: var(--green-dim);
+        box-shadow: 0 0 0 3px oklch(68% 0.14 140 / 0.12);
+      }
+
+      .checkout-gender {
+        border: 0;
+        display: grid;
+        gap: 10px;
+      }
+
+      .checkout-gender-options {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .checkout-gender-option {
+        display: grid;
+        gap: 8px;
+        min-height: 94px;
+        padding: 14px;
+        border: 1px solid var(--border);
+        background: var(--bg2);
+        cursor: pointer;
+        transition:
+          border-color var(--motion-fast) var(--motion-ease-out),
+          background var(--motion-fast) var(--motion-ease-out),
+          transform var(--motion-fast) var(--motion-ease-out);
+      }
+
+      .checkout-gender-option:hover {
+        transform: translateY(-1px);
+        border-color: var(--green-dim);
+      }
+
+      .checkout-gender-option input {
+        accent-color: var(--green);
+        justify-self: start;
+      }
+
+      .checkout-gender-option:has(input:checked) {
+        background: oklch(68% 0.14 140 / 0.1);
+        border-color: var(--green);
+      }
+
+      .checkout-gender-name {
+        font-family: var(--font-display);
+        font-size: 18px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--text);
+      }
+
+      .checkout-gender-price {
+        font-family: var(--font-body);
+        font-size: 13px;
+        color: var(--text-mid);
+      }
+
+      .checkout-summary {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+        padding: 18px 0;
+      }
+
+      .checkout-total {
+        font-family: var(--font-display);
+        font-size: 34px;
+        font-weight: 900;
+        line-height: 1;
+        color: var(--green);
+        white-space: nowrap;
+      }
+
+      .checkout-message {
+        min-height: 22px;
+        font-family: var(--font-body);
+        font-size: 13px;
+        color: var(--text-mid);
+      }
+
+      .checkout-message.is-error {
+        color: oklch(50% 0.16 25);
+      }
+
+      .checkout-message.is-success {
+        color: var(--green);
+      }
+
+      .checkout-result {
+        display: none;
+        gap: 16px;
+        margin-top: 22px;
+        border-top: 1px solid var(--border);
+        padding-top: 22px;
+      }
+
+      .checkout-result.is-visible {
+        display: grid;
+      }
+
+      .checkout-qr {
+        width: min(260px, 100%);
+        aspect-ratio: 1;
+        justify-self: center;
+        border: 1px solid var(--border);
+        background: white;
+        padding: 10px;
+        object-fit: contain;
+      }
+
+      .checkout-pix-code {
+        width: 100%;
+        min-height: 112px;
+        resize: vertical;
+        border: 1px solid var(--border);
+        background: var(--bg2);
+        color: var(--text);
+        padding: 12px;
+        font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+        font-size: 12px;
+        line-height: 1.5;
+      }
+
+      .checkout-copy-button,
+      .checkout-form .btn-primary {
+        width: 100%;
+      }
+
       /* INFO */
       .info-section {
         padding: 100px 48px;
@@ -1970,6 +2232,27 @@
           grid-template-columns: 1fr;
           gap: 48px;
         }
+        .checkout-section {
+          padding: 80px 24px;
+        }
+        .checkout-inner {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+        .checkout-copy {
+          position: static;
+        }
+        .checkout-panel {
+          padding: 20px;
+        }
+        .checkout-price-list,
+        .checkout-gender-options {
+          grid-template-columns: 1fr;
+        }
+        .checkout-summary {
+          align-items: flex-start;
+          flex-direction: column;
+        }
         .info-section {
           padding: 80px 24px;
         }
@@ -2116,6 +2399,8 @@
             .club-desc,
             .club-cta-headline,
             .club-cta-sub,
+            .checkout-title,
+            .checkout-sub,
             .info-headline,
             .info-body,
             .final-big,
@@ -2130,6 +2415,8 @@
         .reveal.visible .open-item,
         .galeria.visible .galeria-item,
         .arue-club.visible .benefit-card,
+        .checkout-section.visible .checkout-price,
+        .checkout-section.visible .checkout-panel,
         .info-section.visible .info-row,
         .arue-club.visible .club-form input,
         .arue-club.visible .club-form .btn-club,
@@ -2637,6 +2924,7 @@
         <li><a href="#lineup">Line-up</a></li>
         <li><a href="#galeria">Galeria</a></li>
         <li><a href="#club">Aruê Club</a></li>
+        <li><a href="#checkout">Comprar</a></li>
         <li><a href="#info">Informações</a></li>
       </ul>
       <button
@@ -2661,6 +2949,7 @@
           <li><a href="#lineup">Line-up</a></li>
           <li><a href="#galeria">Galeria</a></li>
           <li><a href="#club">Aruê Club</a></li>
+          <li><a href="#checkout">Comprar</a></li>
           <li><a href="#info">Informações</a></li>
         </ul>
       </div>
@@ -2699,8 +2988,7 @@
         <div class="hero-ctas">
           <a
             class="btn-primary"
-            href="https://beta.meubilhete.com.br/festa-arue"
-            target="_blank"
+            href="#checkout"
             >Comprar via Pix no Site</a
           >
           <a class="btn-secondary" href="https://wa.me/" target="_blank"
@@ -2746,8 +3034,7 @@
           <div class="section-ctas">
             <a
               class="btn-primary"
-              href="https://beta.meubilhete.com.br/festa-arue"
-              target="_blank"
+              href="#checkout"
               >Comprar via Pix no Site</a
             >
           </div>
@@ -2767,7 +3054,6 @@
               <span class="open-item">Aperol</span>
               <span class="open-item">ST. Pierre</span>
               <span class="open-item">Don Luiz</span>
-              <span class="open-item">Balena</span>
               <span class="open-item">Whisky Chivas</span>
               <span class="open-item">Absolut</span>
               <span class="open-item">Beefeater</span>
@@ -2813,8 +3099,7 @@
         <div class="section-ctas center">
           <a
             class="btn-secondary"
-            href="https://beta.meubilhete.com.br/festa-arue"
-            target="_blank"
+            href="#checkout"
             >Comprar Ingresso</a
           >
         </div>
@@ -3107,6 +3392,143 @@
 
     <div class="section-divider"></div>
 
+    <!-- CHECKOUT PIX -->
+    <section class="checkout-section reveal" id="checkout">
+      <div class="checkout-inner">
+        <div class="checkout-copy">
+          <div class="section-label">Compra via Pix</div>
+          <h2 class="checkout-title">Mini <em>checkout</em> Aruê.</h2>
+          <p class="checkout-sub">
+            Preencha seus dados, escolha o sexo do ingresso e gere o Pix para
+            pagamento.
+          </p>
+          <div class="checkout-price-list" aria-label="Valores por ingresso">
+            <div class="checkout-price">
+              <span>Feminino</span>
+              <strong>R$ 400</strong>
+            </div>
+            <div class="checkout-price">
+              <span>Masculino</span>
+              <strong>R$ 540</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="checkout-panel">
+          <form class="checkout-form" id="pix-checkout-form">
+            <div class="checkout-field">
+              <label for="checkout-name">Nome completo</label>
+              <input
+                id="checkout-name"
+                name="payerName"
+                type="text"
+                autocomplete="name"
+                required
+              />
+            </div>
+            <div class="checkout-field">
+              <label for="checkout-document">CPF ou CNPJ</label>
+              <input
+                id="checkout-document"
+                name="payerDocument"
+                type="text"
+                inputmode="numeric"
+                autocomplete="off"
+                required
+              />
+            </div>
+            <div class="checkout-field">
+              <label for="checkout-email">E-mail</label>
+              <input
+                id="checkout-email"
+                name="payerEmail"
+                type="email"
+                autocomplete="email"
+                required
+              />
+            </div>
+            <div class="checkout-field">
+              <label for="checkout-phone">Telefone com DDD</label>
+              <input
+                id="checkout-phone"
+                name="payerPhone"
+                type="tel"
+                inputmode="tel"
+                autocomplete="tel"
+                required
+              />
+            </div>
+
+            <fieldset class="checkout-gender">
+              <legend>Sexo do ingresso</legend>
+              <div class="checkout-gender-options">
+                <label class="checkout-gender-option">
+                  <input
+                    type="radio"
+                    name="ticketGender"
+                    value="female"
+                    data-price="40000"
+                    required
+                  />
+                  <span class="checkout-gender-name">Feminino</span>
+                  <span class="checkout-gender-price">R$ 400,00</span>
+                </label>
+                <label class="checkout-gender-option">
+                  <input
+                    type="radio"
+                    name="ticketGender"
+                    value="male"
+                    data-price="54000"
+                  />
+                  <span class="checkout-gender-name">Masculino</span>
+                  <span class="checkout-gender-price">R$ 540,00</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <div class="checkout-summary" aria-live="polite">
+              <div>
+                <div class="checkout-summary-label">Total</div>
+                <div class="checkout-message" id="checkout-message">
+                  Escolha o sexo do ingresso para calcular o valor.
+                </div>
+              </div>
+              <strong class="checkout-total" id="checkout-total">R$ 0,00</strong>
+            </div>
+
+            <button class="btn-primary" id="checkout-submit" type="submit">
+              Gerar Pix
+            </button>
+          </form>
+
+          <div class="checkout-result" id="checkout-result" aria-live="polite">
+            <img
+              class="checkout-qr"
+              id="checkout-qr"
+              src=""
+              alt="QR Code Pix"
+              hidden
+            />
+            <textarea
+              class="checkout-pix-code"
+              id="checkout-pix-code"
+              readonly
+              aria-label="Código Pix copia e cola"
+            ></textarea>
+            <button
+              class="btn-secondary checkout-copy-button"
+              id="checkout-copy-pix"
+              type="button"
+            >
+              Copiar código Pix
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
     <!-- INFO DO EVENTO -->
     <section class="info-section reveal" id="info">
       <div class="info-inner">
@@ -3304,8 +3726,7 @@
         <div class="final-ctas">
           <a
             class="btn-primary"
-            href="https://beta.meubilhete.com.br/festa-arue"
-            target="_blank"
+            href="#checkout"
             >Comprar via Pix no Site</a
           >
           <a class="btn-secondary" href="https://wa.me/" target="_blank"
@@ -3377,6 +3798,8 @@
         ".open-item",
         ".galeria-item",
         ".benefit-card",
+        ".checkout-price",
+        ".checkout-panel",
         ".club-form input",
         ".club-form .btn-club",
         ".info-row",
@@ -3492,6 +3915,179 @@
       window.addEventListener("keydown", (event) => {
         if (event.key === "Escape") setMenuOpen(false);
       });
+
+      const checkoutForm = document.querySelector("#pix-checkout-form");
+      const checkoutTotal = document.querySelector("#checkout-total");
+      const checkoutMessage = document.querySelector("#checkout-message");
+      const checkoutResult = document.querySelector("#checkout-result");
+      const checkoutQr = document.querySelector("#checkout-qr");
+      const checkoutPixCode = document.querySelector("#checkout-pix-code");
+      const checkoutCopyPix = document.querySelector("#checkout-copy-pix");
+      const checkoutSubmit = document.querySelector("#checkout-submit");
+      const pixApiUrl = "https://v0-criar-qr-code.vercel.app/api/qrcode";
+      const ticketOptions = {
+        female: { label: "Feminino", value: 40000 },
+        male: { label: "Masculino", value: 54000 },
+      };
+
+      const moneyBRL = new Intl.NumberFormat("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+      });
+
+      const onlyDigits = (value) => String(value || "").replace(/\D/g, "");
+
+      const setCheckoutMessage = (message, state = "") => {
+        if (!checkoutMessage) return;
+        checkoutMessage.textContent = message;
+        checkoutMessage.className = `checkout-message${state ? ` is-${state}` : ""}`;
+      };
+
+      const selectedTicket = () => {
+        const selected = checkoutForm?.querySelector(
+          'input[name="ticketGender"]:checked',
+        );
+        return selected ? ticketOptions[selected.value] : null;
+      };
+
+      const updateCheckoutTotal = () => {
+        const ticket = selectedTicket();
+        if (!checkoutTotal) return;
+
+        checkoutTotal.textContent = moneyBRL.format((ticket?.value || 0) / 100);
+        if (ticket) {
+          setCheckoutMessage(`Ingresso ${ticket.label} selecionado.`);
+        } else {
+          setCheckoutMessage(
+            "Escolha o sexo do ingresso para calcular o valor.",
+          );
+        }
+      };
+
+      const resetCheckoutResult = () => {
+        checkoutResult?.classList.remove("is-visible");
+        if (checkoutQr) {
+          checkoutQr.hidden = true;
+          checkoutQr.removeAttribute("src");
+        }
+        if (checkoutPixCode) checkoutPixCode.value = "";
+      };
+
+      const assertCheckoutData = (documentDigits, phoneDigits) => {
+        if (![11, 14].includes(documentDigits.length)) {
+          return "Informe um CPF com 11 dígitos ou CNPJ com 14 dígitos.";
+        }
+        if (phoneDigits.length < 10 || phoneDigits.length > 11) {
+          return "Informe o telefone com DDD.";
+        }
+        return "";
+      };
+
+      checkoutForm?.addEventListener("change", (event) => {
+        if (event.target?.name === "ticketGender") {
+          resetCheckoutResult();
+          updateCheckoutTotal();
+        }
+      });
+
+      checkoutForm?.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        resetCheckoutResult();
+
+        const formData = new FormData(checkoutForm);
+        const ticket = selectedTicket();
+        const payerDocument = onlyDigits(formData.get("payerDocument"));
+        const payerPhone = onlyDigits(formData.get("payerPhone"));
+        const validationMessage = assertCheckoutData(payerDocument, payerPhone);
+
+        if (!ticket) {
+          setCheckoutMessage(
+            "Escolha feminino ou masculino para gerar o Pix correto.",
+            "error",
+          );
+          checkoutForm.reportValidity();
+          return;
+        }
+
+        if (!checkoutForm.reportValidity()) return;
+
+        if (validationMessage) {
+          setCheckoutMessage(validationMessage, "error");
+          return;
+        }
+
+        const payload = {
+          payerName: String(formData.get("payerName") || "").trim(),
+          payerDocument,
+          payerEmail: String(formData.get("payerEmail") || "").trim(),
+          payerPhone,
+          productName: `Ingresso Aruê 20/06/2026 - ${ticket.label}`,
+          productDescription:
+            "Ingresso individual para a Aruê com Full Open Bar e Full Open Food.",
+          value: ticket.value,
+          orderId: `ARUE-${Date.now().toString(36).toUpperCase()}`,
+          trackingParameters: {
+            source: "site_arue",
+            ticket_gender: ticket.label.toLowerCase(),
+          },
+        };
+
+        checkoutSubmit.disabled = true;
+        checkoutSubmit.textContent = "Gerando Pix...";
+        setCheckoutMessage("Gerando QR Code Pix...", "");
+
+        try {
+          const response = await fetch(pixApiUrl, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+          const result = await response.json().catch(() => ({}));
+          const pixData = result.data || result;
+
+          if (!response.ok || result.success === false) {
+            throw new Error(
+              result.error ||
+                result.message ||
+                "Não foi possível gerar o Pix agora.",
+            );
+          }
+
+          if (!pixData.qrCode && !pixData.pixCode) {
+            throw new Error("A API não retornou QR Code nem código Pix.");
+          }
+
+          if (checkoutQr && pixData.qrCode) {
+            checkoutQr.src = pixData.qrCode;
+            checkoutQr.hidden = false;
+          }
+          if (checkoutPixCode) {
+            checkoutPixCode.value = pixData.pixCode || "";
+          }
+          checkoutResult?.classList.add("is-visible");
+          setCheckoutMessage("Pix gerado. Pague pelo QR Code ou copie o código.", "success");
+        } catch (error) {
+          setCheckoutMessage(error.message || "Erro ao gerar Pix.", "error");
+        } finally {
+          checkoutSubmit.disabled = false;
+          checkoutSubmit.textContent = "Gerar Pix";
+        }
+      });
+
+      checkoutCopyPix?.addEventListener("click", async () => {
+        const code = checkoutPixCode?.value;
+        if (!code) return;
+
+        try {
+          await navigator.clipboard.writeText(code);
+        } catch {
+          checkoutPixCode.select();
+          document.execCommand("copy");
+        }
+        setCheckoutMessage("Código Pix copiado.", "success");
+      });
+
+      updateCheckoutTotal();
 
       document.querySelectorAll(".club-form").forEach((form) => {
         form.addEventListener("submit", (event) => {
