@@ -1641,51 +1641,65 @@
       .checkout-gender-options {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 10px;
+        gap: 6px;
+        padding: 6px;
+        background: var(--bg2);
+        border: 1px solid var(--border);
       }
 
       .checkout-gender-option {
-        display: grid;
-        gap: 8px;
-        min-height: 94px;
-        padding: 14px;
-        border: 1px solid var(--border);
-        background: var(--bg2);
+        position: relative;
+        display: flex;
+        min-height: 46px;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 14px;
+        background: transparent;
         cursor: pointer;
         transition:
-          border-color var(--motion-fast) var(--motion-ease-out),
           background var(--motion-fast) var(--motion-ease-out),
+          box-shadow var(--motion-fast) var(--motion-ease-out),
           transform var(--motion-fast) var(--motion-ease-out);
       }
 
       .checkout-gender-option:hover {
         transform: translateY(-1px);
-        border-color: var(--green-dim);
+        background: var(--bg);
       }
 
       .checkout-gender-option input {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        opacity: 0;
         accent-color: var(--green);
-        justify-self: start;
+        cursor: pointer;
+      }
+
+      .checkout-gender-option:has(input:focus-visible) {
+        box-shadow: 0 0 0 3px oklch(68% 0.14 140 / 0.14);
       }
 
       .checkout-gender-option:has(input:checked) {
-        background: oklch(68% 0.14 140 / 0.1);
-        border-color: var(--green);
+        background: var(--green);
       }
 
       .checkout-gender-name {
+        position: relative;
+        z-index: 1;
         font-family: var(--font-display);
-        font-size: 18px;
+        font-size: 14px;
         font-weight: 800;
-        letter-spacing: 0.08em;
+        letter-spacing: 0.06em;
         text-transform: uppercase;
         color: var(--text);
+        transition: color var(--motion-fast) var(--motion-ease-out);
       }
 
-      .checkout-gender-price {
-        font-family: var(--font-body);
-        font-size: 13px;
-        color: var(--text-mid);
+      .checkout-gender-option:has(input:checked) .checkout-gender-name {
+        color: var(--bg);
       }
 
       .checkout-summary {
@@ -2245,8 +2259,7 @@
         .checkout-panel {
           padding: 20px;
         }
-        .checkout-price-list,
-        .checkout-gender-options {
+        .checkout-price-list {
           grid-template-columns: 1fr;
         }
         .checkout-summary {
@@ -3471,7 +3484,6 @@
                     required
                   />
                   <span class="checkout-gender-name">Feminino</span>
-                  <span class="checkout-gender-price">R$ 400,00</span>
                 </label>
                 <label class="checkout-gender-option">
                   <input
@@ -3481,7 +3493,6 @@
                     data-price="54000"
                   />
                   <span class="checkout-gender-name">Masculino</span>
-                  <span class="checkout-gender-price">R$ 540,00</span>
                 </label>
               </div>
             </fieldset>
