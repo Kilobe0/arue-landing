@@ -3480,7 +3480,7 @@
                     type="radio"
                     name="ticketGender"
                     value="female"
-                    data-price="40000"
+                    data-price="400"
                     required
                   />
                   <span class="checkout-gender-name">Feminino</span>
@@ -3490,7 +3490,7 @@
                     type="radio"
                     name="ticketGender"
                     value="male"
-                    data-price="54000"
+                    data-price="540"
                   />
                   <span class="checkout-gender-name">Masculino</span>
                 </label>
@@ -3937,8 +3937,8 @@
       const checkoutSubmit = document.querySelector("#checkout-submit");
       const pixApiUrl = "https://v0-criar-qr-code.vercel.app/api/qrcode";
       const ticketOptions = {
-        female: { label: "Feminino", value: 40000 },
-        male: { label: "Masculino", value: 54000 },
+        female: { label: "Feminino", value: 400 },
+        male: { label: "Masculino", value: 540 },
       };
 
       const moneyBRL = new Intl.NumberFormat("pt-BR", {
@@ -3947,6 +3947,37 @@
       });
 
       const onlyDigits = (value) => String(value || "").replace(/\D/g, "");
+
+      const asTrimmedString = (value) =>
+        typeof value === "string" ? value.trim() : "";
+
+      const firstTextValue = (...values) =>
+        values.map(asTrimmedString).find(Boolean) || "";
+
+      const normalizeQrImageSrc = (pixData) => {
+        const rawImage = firstTextValue(
+          pixData.qrCodeBase64,
+          pixData.qrCodeImage,
+          pixData.qrCodeUrl,
+          pixData.image,
+          pixData.base64,
+        );
+
+        if (!rawImage) return "";
+        if (/^(data:image\/|https?:\/\/)/i.test(rawImage)) return rawImage;
+        return `data:image/png;base64,${rawImage}`;
+      };
+
+      const normalizePixCopyCode = (pixData) => {
+        const code = firstTextValue(
+          pixData.pixCode,
+          pixData.copyPaste,
+          pixData.copiaECola,
+          pixData.qrCode,
+        );
+
+        return /^data:image\//i.test(code) ? "" : code;
+      };
 
       const setCheckoutMessage = (message, state = "") => {
         if (!checkoutMessage) return;
@@ -3965,7 +3996,7 @@
         const ticket = selectedTicket();
         if (!checkoutTotal) return;
 
-        checkoutTotal.textContent = moneyBRL.format((ticket?.value || 0) / 100);
+        checkoutTotal.textContent = moneyBRL.format(ticket?.value || 0);
         if (ticket) {
           setCheckoutMessage(`Ingresso ${ticket.label} selecionado.`);
         } else {
@@ -4064,16 +4095,19 @@
             );
           }
 
-          if (!pixData.qrCode && !pixData.pixCode) {
+          const qrImageSrc = normalizeQrImageSrc(pixData);
+          const pixCopyCode = normalizePixCopyCode(pixData);
+
+          if (!qrImageSrc && !pixCopyCode) {
             throw new Error("A API não retornou QR Code nem código Pix.");
           }
 
-          if (checkoutQr && pixData.qrCode) {
-            checkoutQr.src = pixData.qrCode;
+          if (checkoutQr && qrImageSrc) {
+            checkoutQr.src = qrImageSrc;
             checkoutQr.hidden = false;
           }
           if (checkoutPixCode) {
-            checkoutPixCode.value = pixData.pixCode || "";
+            checkoutPixCode.value = pixCopyCode;
           }
           checkoutResult?.classList.add("is-visible");
           setCheckoutMessage("Pix gerado. Pague pelo QR Code ou copie o código.", "success");
