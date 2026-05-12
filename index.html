@@ -230,6 +230,129 @@
         filter: invert(1);
       }
 
+      .sound-toggle {
+        min-height: 42px;
+        border: 1px solid oklch(96% 0.004 145 / 0.36);
+        background: transparent;
+        color: oklch(96% 0.004 145);
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 11px 15px;
+        cursor: pointer;
+        font-family: var(--font-display);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        line-height: 1;
+        text-transform: uppercase;
+        transition:
+          background var(--motion-fast) var(--motion-ease-out),
+          border-color var(--motion-fast) var(--motion-ease-out),
+          color var(--motion-fast) var(--motion-ease-out),
+          transform var(--motion-fast) var(--motion-ease-out);
+      }
+
+      .sound-toggle:hover {
+        border-color: oklch(96% 0.004 145 / 0.72);
+        background: oklch(4% 0.012 145 / 0.72);
+        transform: translateY(-1px);
+      }
+
+      .sound-control {
+        position: fixed;
+        left: 24px;
+        bottom: 24px;
+        z-index: 160;
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 6px;
+        background: oklch(4% 0.012 145 / 0.58);
+        border: 1px solid oklch(96% 0.004 145 / 0.2);
+        backdrop-filter: blur(14px);
+        box-shadow: 0 12px 30px oklch(5% 0.02 145 / 0.22);
+      }
+
+      .volume-control {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding-right: 12px;
+        color: oklch(96% 0.004 145 / 0.78);
+      }
+
+      .volume-label {
+        font-family: var(--font-display);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        line-height: 1;
+        text-transform: uppercase;
+      }
+
+      .volume-slider {
+        width: 96px;
+        height: 18px;
+        accent-color: var(--gold);
+        cursor: pointer;
+      }
+
+      .volume-slider:focus-visible {
+        outline: 2px solid currentColor;
+        outline-offset: 5px;
+      }
+
+      .sound-toggle:focus-visible {
+        outline: 2px solid currentColor;
+        outline-offset: 5px;
+      }
+
+      .sound-toggle.is-playing {
+        border-color: var(--gold);
+        color: var(--gold);
+      }
+
+      .sound-toggle-icon {
+        display: inline-flex;
+        align-items: flex-end;
+        gap: 3px;
+        width: 16px;
+        height: 14px;
+      }
+
+      .sound-toggle-icon span {
+        width: 3px;
+        height: 5px;
+        background: currentColor;
+        transform-origin: bottom;
+        opacity: 0.48;
+        transition:
+          height var(--motion-fast) var(--motion-ease-out),
+          opacity var(--motion-fast) var(--motion-ease-out);
+      }
+
+      .sound-toggle-icon span:nth-child(2) {
+        height: 9px;
+      }
+
+      .sound-toggle-icon span:nth-child(3) {
+        height: 13px;
+      }
+
+      .sound-toggle.is-playing .sound-toggle-icon span {
+        opacity: 1;
+        animation: soundBar 920ms ease-in-out infinite alternate;
+      }
+
+      .sound-toggle.is-playing .sound-toggle-icon span:nth-child(2) {
+        animation-delay: 140ms;
+      }
+
+      .sound-toggle.is-playing .sound-toggle-icon span:nth-child(3) {
+        animation-delay: 280ms;
+      }
+
       .nav-menu-toggle,
       .nav-drawer,
       .nav-drawer-backdrop {
@@ -2112,6 +2235,20 @@
         nav.scrolled {
           padding: 20px 24px;
         }
+        .sound-control {
+          left: 14px;
+          right: 14px;
+          bottom: 14px;
+          justify-content: space-between;
+        }
+        .sound-toggle {
+          min-height: 38px;
+          padding: 10px 12px;
+          font-size: 11px;
+        }
+        .volume-slider {
+          width: min(34vw, 110px);
+        }
         .nav-links {
           display: none;
         }
@@ -2902,6 +3039,15 @@
             filter: drop-shadow(0 0 6px oklch(72% 0.14 145 / 0.55));
           }
         }
+
+        @keyframes soundBar {
+          from {
+            transform: scaleY(0.42);
+          }
+          to {
+            transform: scaleY(1);
+          }
+        }
       }
 
       @media (prefers-reduced-motion: reduce) {
@@ -2967,6 +3113,37 @@
         </ul>
       </div>
     </nav>
+
+    <audio id="background-audio" src="assets/baile.mp3" loop preload="auto"></audio>
+    <div class="sound-control" aria-label="Controle de som">
+      <button
+        class="sound-toggle"
+        id="sound-toggle"
+        type="button"
+        aria-label="Ativar som"
+        aria-pressed="false"
+      >
+        <span class="sound-toggle-icon" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+        <span class="sound-toggle-text">Som</span>
+      </button>
+      <label class="volume-control" for="volume-slider">
+        <span class="volume-label">Vol</span>
+        <input
+          class="volume-slider"
+          id="volume-slider"
+          type="range"
+          min="0"
+          max="100"
+          value="28"
+          aria-label="Volume"
+          aria-valuetext="28%"
+        />
+      </label>
+    </div>
 
     <!-- HERO -->
     <section class="hero" id="home">
@@ -3801,6 +3978,89 @@
         });
 
         sponsorTrack.replaceChildren(...longSponsorRun, ...repeatedSponsorRun);
+      }
+
+      const backgroundAudio = document.querySelector("#background-audio");
+      const soundToggle = document.querySelector("#sound-toggle");
+      const volumeSlider = document.querySelector("#volume-slider");
+
+      if (backgroundAudio && soundToggle && volumeSlider) {
+        let lastAudibleVolume = Number(volumeSlider.value) || 28;
+
+        const setAudioVolume = (value) => {
+          const volume = Math.min(Math.max(Number(value) || 0, 0), 100);
+          volumeSlider.value = String(volume);
+          volumeSlider.setAttribute("aria-valuetext", `${volume}%`);
+          backgroundAudio.volume = volume / 100;
+          backgroundAudio.muted = volume === 0;
+          if (volume > 0) lastAudibleVolume = volume;
+        };
+
+        setAudioVolume(volumeSlider.value);
+
+        const setSoundState = (isPlaying) => {
+          soundToggle.classList.toggle("is-playing", isPlaying);
+          soundToggle.setAttribute("aria-pressed", String(isPlaying));
+          soundToggle.setAttribute(
+            "aria-label",
+            isPlaying ? "Pausar som" : "Ativar som",
+          );
+          const label = soundToggle.querySelector(".sound-toggle-text");
+          if (label) label.textContent = isPlaying ? "Pausar" : "Som";
+        };
+
+        const playBackgroundAudio = async () => {
+          try {
+            if (backgroundAudio.muted || backgroundAudio.volume === 0) {
+              setAudioVolume(lastAudibleVolume || 28);
+            }
+            await backgroundAudio.play();
+            setSoundState(true);
+            return true;
+          } catch (error) {
+            setSoundState(false);
+            return false;
+          }
+        };
+
+        const pauseBackgroundAudio = () => {
+          backgroundAudio.pause();
+          setSoundState(false);
+        };
+
+        const removeAudioStartListeners = () => {
+          window.removeEventListener("click", startAudioFromInteraction);
+          window.removeEventListener("keydown", startAudioFromInteraction);
+          window.removeEventListener("touchstart", startAudioFromInteraction);
+        };
+
+        const startAudioFromInteraction = async (event) => {
+          if (event.target?.closest?.("#sound-toggle")) return;
+          if (await playBackgroundAudio()) removeAudioStartListeners();
+        };
+
+        soundToggle.addEventListener("click", () => {
+          if (backgroundAudio.paused) {
+            playBackgroundAudio();
+          } else {
+            pauseBackgroundAudio();
+          }
+        });
+
+        volumeSlider.addEventListener("input", () => {
+          setAudioVolume(volumeSlider.value);
+          if (Number(volumeSlider.value) > 0 && backgroundAudio.paused) {
+            playBackgroundAudio();
+          }
+        });
+
+        backgroundAudio.addEventListener("pause", () => setSoundState(false));
+        backgroundAudio.addEventListener("play", () => setSoundState(true));
+        window.addEventListener("click", startAudioFromInteraction);
+        window.addEventListener("keydown", startAudioFromInteraction);
+        window.addEventListener("touchstart", startAudioFromInteraction, {
+          passive: true,
+        });
       }
 
       const revealEls = document.querySelectorAll(".reveal");
